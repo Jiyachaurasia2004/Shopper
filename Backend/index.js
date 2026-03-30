@@ -26,7 +26,7 @@ const startServer = (port) => {
 
 // ================= MIDDLEWARE =================
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: 'https://shopper-frontend-1548.onrender.com'}));
 
 // ================= CLOUDINARY SETUP =================
 const { v2: cloudinary } = require('cloudinary');
