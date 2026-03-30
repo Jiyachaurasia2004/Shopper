@@ -1,0 +1,36 @@
+.slider {
+  width: 90%;
+  height: 40vh;
+  margin: 50px 60px;
+  overflow: hidden;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 800px) {
+    .slider {
+        height: 30vh;
+        margin: 30px auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .slider {
+        height: 20vh;
+        width: 100%;
+        border-radius: 0;
+        margin: 20px auto;
+    }
+}
