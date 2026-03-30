@@ -26,7 +26,12 @@ const startServer = (port) => {
 
 // ================= MIDDLEWARE =================
 app.use(express.json());
-app.use(cors({origin: 'https://shopper-frontend-1548.onrender.com','https://shopper-admin-hm3y.onrender.com'}));
+app.use(cors({
+  origin: [
+    'https://shopper-frontend-1548.onrender.com',
+    'https://shopper-admin-hm3y.onrender.com'
+  ]
+}));
 
 // ================= CLOUDINARY SETUP =================
 const { v2: cloudinary } = require('cloudinary');
