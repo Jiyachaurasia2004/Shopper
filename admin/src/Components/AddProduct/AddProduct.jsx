@@ -36,7 +36,7 @@ const AddProduct = () => {
       const formData = new FormData();
       formData.append('product', image);
 
-      const uploadResp = await fetch('http://localhost:4000/upload', {
+      const uploadResp = await fetch('https://shopper-backend-f01t.onrender.com/upload', {
         method: 'POST',
         body: formData
       });
