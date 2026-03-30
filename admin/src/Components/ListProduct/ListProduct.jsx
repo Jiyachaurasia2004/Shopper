@@ -9,7 +9,7 @@ const ListProduct = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/allproducts');
+      const res = await fetch('https://shopper-backend-f01t.onrender.com/allproducts');
       const data = await res.json();
       setAllProducts(data);
     } catch (error) {
@@ -28,7 +28,7 @@ const ListProduct = () => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      const res = await fetch('http://localhost:4000/removeproduct', {
+      const res = await fetch('https://shopper-backend-f01t.onrender.com/removeproduct', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id })
