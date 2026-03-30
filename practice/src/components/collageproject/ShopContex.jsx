@@ -18,11 +18,11 @@ const ShopContextProvider = (props) => {
     const [promoMessage, setPromoMessage] = useState('');
 
     useEffect(()=>{
-        fetch('https://shopper-frontend-1548.onrender.com/allproducts')
+        fetch('https://shopper-backend-f01t.onrender.com/allproducts')
         .then((response)=>response.json())
         .then((data)=>setAll_product(data))
         if(localStorage.getItem('auth-token')){
-            fetch('https://shopper-frontend-1548.onrender.com/getcart',{
+            fetch('https://shopper-backend-f01t.onrender.com/getcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -38,7 +38,7 @@ const ShopContextProvider = (props) => {
     const addToCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         if(localStorage.getItem('auth-token')){
-            fetch('https://shopper-frontend-1548.onrender.com/addtocart',{
+            fetch('https://shopper-backend-f01t.onrender.com/addtocart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -54,7 +54,7 @@ const ShopContextProvider = (props) => {
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if(localStorage.getItem('auth-token')){
-            fetch('https://shopper-frontend-1548.onrender.com/removefromcart',{
+            fetch('https://shopper-backend-f01t.onrender.com/removefromcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
