@@ -10,6 +10,15 @@ import Footer from "./components/collageproject/Footer";
 import mens_banner from "./components/Assets/banner_mens.png"
 import women_banner from "./components/Assets/banner_women.png"
 import kid_banner from "./components/Assets/banner_kids.png"
+import OrderSuccess from "./components/collageproject/OrderSuccess/OrderSuccess";
+
+
+// Admin Imports
+import ProtectedRoute from "./components/ProtectedRoute";
+import Admin from "./AdminPages/Admin";
+import AddProduct from "./AdminComponents/AddProduct/AddProduct";
+import ListProduct from "./AdminComponents/ListProduct/ListProduct";
+import LoginSignup from "./AdminComponents/AdminLogin/LoginSignup";
 
 function App() {
   return (
@@ -25,7 +34,18 @@ function App() {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/checkout" element={<PlaceOrder/>}/>
+          <Route path="/order-success/:orderId" element={<OrderSuccess />} />
           <Route path="/login" element={<Loginsign />} />
+
+
+          {/* Admin Routes */}
+          <Route path="/admin-login" element={<LoginSignup />} />
+          <Route path="/admin" element={<ProtectedRoute />}>
+             <Route path="" element={<Admin />}>
+                 <Route path="addproduct" element={<AddProduct />} />
+                 <Route path="listproduct" element={<ListProduct />} />
+             </Route>
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
