@@ -160,7 +160,9 @@ function PlaceOrder() {
 
   return (
     <div className="checkout-page">
-      <h1>Checkout</h1>
+    <h1 className="checkout-heading">
+  🛒 Checkout
+</h1>
       <div className="checkout-grid">
         <section className="checkout-card address">
           <h2>1. Shipping Details</h2>
@@ -242,12 +244,12 @@ function PlaceOrder() {
           <hr style={{borderColor: '#eee', margin: '15px 0'}} />
           <div className="summary-total">
             <strong>Total Amount</strong>
-            <strong style={{color: '#007bff'}}>₹ {orderTotal.toFixed(2)}</strong>
+            <strong style={{color: '#e74c3c'}}>₹ {orderTotal.toFixed(2)}</strong>
           </div>
           
           <div style={{marginTop: '30px'}}>
              <button form="checkout-form" type="submit" className="primary-btn" disabled={loading}>
-               {loading ? "Please Wait..." : "Pay with Razorpay"}
+              {loading ? "Processing..." : "Pay ₹" + orderTotal}
              </button>
           </div>
         </section>
