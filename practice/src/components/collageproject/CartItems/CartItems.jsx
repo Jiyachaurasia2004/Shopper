@@ -68,7 +68,7 @@ const CartItems = () => {
 
                     <div className="cartitems-total-item">
                         <h3>Total</h3>
-                        <h3>₹{subtotal - (subtotal * discount) / 100}</h3>
+                        <h3>₹{total}</h3>
                     </div>
 
                     <button onClick={() => navigate('/checkout')}>PROCEED TO CHECKOUT</button>
