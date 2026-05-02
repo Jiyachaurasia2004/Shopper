@@ -36,7 +36,7 @@ const AddProduct = () => {
       const formData = new FormData();
       formData.append('product', image);
 
-      const uploadResp = await fetch('http://localhost:4000/upload', {
+      const uploadResp = await fetch('https://shopper-commerce.onrender.com/upload', {
         method: 'POST',
         body: formData
       });
@@ -50,7 +50,7 @@ const AddProduct = () => {
 
       // 2️⃣ Add product with Cloudinary image URL
       const product = { ...productDetails, image_url: uploadData.image_url };
-      const addResp = await fetch('http://localhost:4000/addproduct', {
+      const addResp = await fetch('https://shopper-commerce.onrender.com/addproduct', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product)
