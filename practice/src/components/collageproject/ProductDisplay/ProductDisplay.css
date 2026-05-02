@@ -239,3 +239,22 @@
         justify-content: center;
     }
 }
+.productdisplay-right-stock {
+  margin: 15px 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.in-stock {
+  color: #27ae60;
+}
+
+.out-of-stock {
+  color: #e74c3c;
+}
+
+.disabled-btn {
+  background-color: #ccc !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}

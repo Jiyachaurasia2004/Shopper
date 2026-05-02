@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./LoginSignup.css";
+import { jwtDecode } from "jwt-decode";
 
 const AdminAuth = () => {
 
@@ -54,7 +55,7 @@ const AdminAuth = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:4000/login", {
+    const response = await fetch("http://localhost:4000/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,8 +69,18 @@ const AdminAuth = () => {
     const data = await response.json();
 
     if (data.success) {
-      localStorage.setItem("auth-token", data.token);
-      window.location.replace("/addproduct");
+      const token = data.token;
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.role === 'admin') {
+          localStorage.setItem("auth-token", token);
+          window.location.replace("/admin");
+        } else {
+          alert("Access Denied: Admin role required");
+        }
+      } catch (err) {
+        alert("Invalid token received");
+      }
     } else {
       alert("Invalid credentials");
     }

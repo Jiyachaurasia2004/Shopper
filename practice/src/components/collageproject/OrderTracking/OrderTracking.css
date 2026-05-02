@@ -1,0 +1,480 @@
+.order-tracking {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.tracking-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.tracking-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.tracking-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    background: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.step.active .circle {
+    background: #4caf50;
+    color: white;
+}
+
+.status-label {
+    font-size: 12px;
+    text-transform: capitalize;
+    color: #888;
+}
+
+.step.active .status-label {
+    color: #333;
+    font-weight: 500;
+}
+
+.line {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: #eee;
+    z-index: -1;
+}
+.diving{
+    font-weight: 600;
+}
+.step.active .line {
+    background: #4caf50;
+}
+
+.tracking-history {
+    margin-top: 40px;
+}
+
+.tracking-history h3 {
+    margin-bottom: 20px;
+}
+
+.tracking-history ul {
+    list-style: none;
+    padding-left: 20px;
+    border-left: 2px solid #eee;
+}
+
+.tracking-history li {
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+.dot {
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: #4caf50;
+    border-radius: 50%;
+}
+
+.h-status {
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.h-message {
+    font-size: 14px;
+    color: #666;
+}
+
+.h-date {
+    font-size: 12px;
+    color: #999;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff4141;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+@media (max-width: 768px) {
+
+    .order-tracking {
+        padding: 15px;
+    }
+
+    .tracking-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tracking-progress {
+        gap: 10px;
+    }
+
+    .circle {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .status-label {
+        font-size: 11px;
+    }
+}
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+@media (max-width: 600px) {
+
+    .order-tracking {
+        padding: 10px;
+    }
+
+    .tracking-card {
+        padding: 15px;
+    }
+
+    /* header stack */
+    .tracking-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    /* 🔥 keep horizontal but scrollable */
+    .tracking-progress {
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .step {
+        min-width: 80px; /* important */
+    }
+
+    .status-label {
+        font-size: 10px;
+    }
+
+    /* history adjust */
+    .tracking-history ul {
+        padding-left: 15px;
+    }
+
+    .dot {
+        left: -20px;
+    }
+}.order-tracking {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.tracking-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.tracking-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* ========================= */
+/* DESKTOP PROGRESS */
+/* ========================= */
+.tracking-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    background: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.step.active .circle {
+    background: #4caf50;
+    color: white;
+}
+
+.status-label {
+    font-size: 12px;
+    text-transform: capitalize;
+    color: #888;
+}
+
+.step.active .status-label {
+    color: #333;
+    font-weight: 500;
+}
+
+.line {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: #eee;
+    z-index: -1;
+}
+
+.step.active .line {
+    background: #4caf50;
+}
+
+/* ========================= */
+/* HISTORY */
+/* ========================= */
+.tracking-history {
+    margin-top: 40px;
+}
+
+.tracking-history h3 {
+    margin-bottom: 20px;
+}
+
+.tracking-history ul {
+    list-style: none;
+    padding-left: 20px;
+    border-left: 2px solid #eee;
+}
+
+.tracking-history li {
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+.dot {
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: #4caf50;
+    border-radius: 50%;
+}
+
+.h-status {
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.h-message {
+    font-size: 14px;
+    color: #666;
+}
+
+.h-date {
+    font-size: 12px;
+    color: #999;
+}
+
+/* ========================= */
+/* LOADER */
+/* ========================= */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff4141;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+@media (max-width: 768px) {
+
+    .order-tracking {
+        padding: 15px;
+    }
+
+    .tracking-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tracking-progress {
+        gap: 10px;
+    }
+
+    .circle {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .status-label {
+        font-size: 11px;
+    }
+}
+
+/* ========================= */
+/* 📱 MOBILE (VERTICAL FIX) */
+/* ========================= */
+@media (max-width: 600px) {
+
+    .order-tracking {
+        padding: 10px;
+    }
+
+    .tracking-card {
+        padding: 15px;
+    }
+
+    /* HEADER */
+    .tracking-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    /* 🔥 VERTICAL TIMELINE */
+    .tracking-progress {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+        position: relative;
+    }
+
+    .step {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        position: relative;
+    }
+
+    .circle {
+        margin-bottom: 0;
+    }
+
+    /* 🔥 MAIN CHANGE: horizontal line → vertical line */
+    .line {
+        position: absolute;
+        top: 30px;         /* start below circle */
+        left: 15px;
+        width: 2px;        /* vertical */
+        height: 100%;      /* full height */
+        background: #eee;
+    }
+
+    /* last step line hide */
+    .step:last-child .line {
+        display: none;
+    }
+
+    /* active line */
+    .step.active .line {
+        background: #4caf50;
+    }
+
+    .status-label {
+        font-size: 13px;
+    }
+
+    /* HISTORY */
+    .tracking-history ul {
+        padding-left: 15px;
+    }
+
+    .dot {
+        left: -20px;
+    }
+}

@@ -39,11 +39,18 @@ const CartItems = () => {
                         <div key={e.id}>
                             <div className="cartitems-format cartitems-format-main">
                                 <img src={e.image} alt="" className='cartitems-product-icon' />
-                                <p>{e.name}</p>
+                                <div className="cartitems-details">
+                                    <p>{e.name}</p>
+                                    { (e.stock || 0) < cartItems[e.id] && (
+                                        <p className="cartitems-stock-warning">
+                                            { (e.stock || 0) === 0 ? "Out of Stock" : `Only ${e.stock} left in stock`}
+                                        </p>
+                                    )}
+                                </div>
                                 <p>₹{e.new_price}</p>
                                 <button className='cartitems-quantity'>{cartItems[e.id]}</button>
                                 <p>₹{e.new_price * cartItems[e.id]}</p>
-                                <img src={remove_icon} onClick={() => removeFromCart(e.id)} alt="" />
+                                <img src={remove_icon} onClick={() => removeFromCart(e.id)} alt="" className='cartitems-remove-icon' />
                             </div>
                             <hr />
                         </div>

@@ -324,3 +324,22 @@
     bottom: 10px;
   }
 }
+.oos-item {
+  opacity: 0.7;
+  border: 1px solid #e74c3c !important;
+}
+
+.oos-warning {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.oos-error-msg {
+  color: #e74c3c;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}

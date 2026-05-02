@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import "./placeOrder.css";
 import { ShopContext } from "../ShopContex";
 
@@ -21,6 +22,15 @@ function PlaceOrder() {
   
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  // Derive items list from cart and products
+  const items = Object.keys(cartItems)
+    .filter(id => cartItems[id] > 0)
+    .map(id => {
+      const product = all_product.find(p => p.id === Number(id));
+      return product ? { ...product, quantity: cartItems[id] } : null;
+    })
+    .filter(item => item !== null);
 
   const orderTotal = subtotal - (subtotal * discount) / 100 + shipping;
 
@@ -63,27 +73,16 @@ function PlaceOrder() {
     }
     
     if (getTotalCartItems() === 0) {
-      alert("Your cart is empty!");
+      toast.error("Your cart is empty!");
       return;
     }
 
     setLoading(true);
 
-    // Prepare Items
-    let items = [];
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = all_product.find((product) => product.id === Number(item));
-        if (itemInfo) {
-            items.push({ ...itemInfo, quantity: cartItems[item] });
-        }
-      }
-    }
-
     try {
       const token = localStorage.getItem('auth-token');
       if (!token) {
-        alert("Please login to place an order");
+        toast.info("Please login to place an order");
         navigate("/login");
         return;
       }
@@ -125,11 +124,11 @@ function PlaceOrder() {
               if (verifyRes.data.success) {
                 navigate(`/order-success/${data.dbOrderId}`);
               } else {
-                alert("Payment verification failed");
+                toast.error("Payment verification failed");
               }
             } catch (err) {
               console.error(err);
-              alert("Payment Verification Error!");
+              toast.error("Payment Verification Error!");
             }
           },
           prefill: {
@@ -146,13 +145,13 @@ function PlaceOrder() {
         // Wait, Razorpay's frontend script ALWAYS requires the `key` (which is KEY_ID). The secret is not exposed.
         const rzp = new window.Razorpay(options);
         rzp.on('payment.failed', function (response){
-          alert("Payment Failed: " + response.error.description);
+          toast.error("Payment Failed: " + response.error.description);
         });
         rzp.open();
       }
     } catch (error) {
       console.error(error);
-      alert("Error creating order");
+      toast.error(error.response?.data?.message || "Error creating order");
     } finally {
       setLoading(false);
     }
@@ -210,13 +209,15 @@ function PlaceOrder() {
           <div className="items-list">
             {all_product.map((e) => {
               if (cartItems[e.id] > 0) {
+                const isOutOfStock = e.stock < cartItems[e.id];
                 return (
-                  <div key={e.id} className="item-row">
+                  <div key={e.id} className={`item-row ${isOutOfStock ? 'oos-item' : ''}`}>
                     <div className="item-info">
                       <img src={e.image} alt={e.name} className="item-image" />
                       <div>
                         <div className="item-name">{e.name}</div>
                         <div className="item-qty">Qty: {cartItems[e.id]}</div>
+                        {isOutOfStock && <div className="oos-warning" style={{color: '#e74c3c', fontSize: '0.8rem'}}>⚠️ Only {e.stock} left</div>}
                       </div>
                     </div>
                     <div>₹{e.new_price * cartItems[e.id]}</div>
@@ -248,8 +249,13 @@ function PlaceOrder() {
           </div>
           
           <div style={{marginTop: '30px'}}>
-             <button form="checkout-form" type="submit" className="primary-btn" disabled={loading}>
-              {loading ? "Processing..." : "Pay ₹" + orderTotal}
+             <button 
+                form="checkout-form" 
+                type="submit" 
+                className="primary-btn" 
+                disabled={loading || items.some(i => (i.stock || 0) < i.quantity)}
+             >
+              {items.some(i => (i.stock || 0) < i.quantity) ? "OUT OF STOCK" : (loading ? "Processing..." : "Pay ₹" + orderTotal)}
              </button>
           </div>
         </section>

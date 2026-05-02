@@ -239,3 +239,20 @@
     width: 100%;
   }
 }
+.cartitems-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cartitems-stock-warning {
+  color: #ff4141;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cartitems-remove-icon {
+  cursor: pointer;
+  width: 15px;
+}

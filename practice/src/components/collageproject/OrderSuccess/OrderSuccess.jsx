@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import './OrderSuccess.css';
 
 const OrderSuccess = () => {
@@ -25,7 +26,7 @@ const OrderSuccess = () => {
       link.parentNode.removeChild(link);
     } catch (error) {
       console.error("Failed to download invoice", error);
-      alert("Failed to download invoice. Please try again.");
+      toast.error("Failed to download invoice. Please try again.");
     }
   };
 
@@ -50,6 +51,9 @@ const OrderSuccess = () => {
         <div className="action-buttons">
           <button className="btn-download" onClick={handleDownloadInvoice}>
             📄 Download Invoice
+          </button>
+          <button className="btn-track" onClick={() => navigate(`/track-order/${orderId}`)}>
+            🚚 Track Order
           </button>
           <button className="btn-home" onClick={() => navigate('/')}>
             Continue Shopping

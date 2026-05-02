@@ -53,7 +53,20 @@ const ProductDisplay = (props) => {
                 <div>XXl</div>
             </div>
         </div>
-        <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
+        <div className="productdisplay-right-stock">
+            {product.stock > 0 ? (
+                <span className="in-stock">In Stock: {product.stock}</span>
+            ) : (
+                <span className="out-of-stock">Out of Stock</span>
+            )}
+        </div>
+        <button 
+            onClick={() => { product.stock > 0 && addToCart(product.id) }} 
+            disabled={product.stock <= 0}
+            className={product.stock <= 0 ? 'disabled-btn' : ''}
+        >
+            {product.stock > 0 ? "ADD TO CART" : "OUT OF STOCK"}
+        </button>
         <p className="productdisplay-right-category"><span>Category :</span>Women,  T-Shirt, Crop Top</p>
         <p className="productdisplay-right-category"><span>Tags :</span>Modern, Latest</p>
       </div>

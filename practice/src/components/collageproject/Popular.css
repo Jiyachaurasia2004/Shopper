@@ -1,74 +1,78 @@
-.popular{
-    display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 10px;
-     height: auto;
-     margin-bottom: 150px;
-}
-.popular h1{
-    color: #171717;
-    font-size: 50px;
-    font-weight: 600;
-    margin-top: 40px;
-}
-.popular hr{
-    width:200px ;
-    height:6px ;
-    border-radius:10px ;
-    background: #252525; 
-}
-.popular-item{
-    margin-top: 50px;
-    display: flex; 
-    gap: 30px;
-    
+/* =============================================
+   POPULAR SECTION — Grid Container
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.popular {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 100px;
+  padding: 0 20px;
+  font-family: 'Inter', sans-serif;
 }
 
+.popular h1 {
+  color: #1a1a2e;
+  font-size: 42px;
+  font-weight: 700;
+  margin-top: 50px;
+  letter-spacing: -0.5px;
+}
+
+.popular hr {
+  width: 80px;
+  height: 4px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ff4e50, #f9d423);
+  margin: 4px 0 0;
+}
+
+/* ── Cards Row ── */
+.popular-item {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;          /* wrap so cards stay uniform */
+  gap: 24px;
+  justify-content: center;
+}
+
+/* ── Responsive Breakpoints ── */
 @media (max-width: 1280px) {
-    .popular h1 {
-        font-size: 40px;
-    }
-    .popular hr {
-        width: 150px;
-        height: 4px;
-    }
-    .popular-item {
-        gap: 20px;
-        margin-top: 30px;
-    }
+  .popular h1 {
+    font-size: 36px;
+  }
+  .popular-item {
+    gap: 20px;
+  }
 }
 
 @media (max-width: 1024px) {
-    .popular h1 {
-        font-size: 30px;
-    }
-    .popular hr {
-        width: 120px;
-        height: 3px;
-    }
-    .popular-item {
-        gap: 15px;
-    }
+  .popular h1 {
+    font-size: 30px;
+  }
+  .popular-item {
+    gap: 18px;
+  }
 }
 
 @media (max-width: 800px) {
-    .popular {
-        height: auto;
-        padding-bottom: 50px;
-    }
-    .popular-item {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        justify-items: center;
-    }
+  .popular {
+    padding-bottom: 40px;
+  }
+  .popular-item {
+    gap: 16px;
+  }
 }
 
 @media (max-width: 500px) {
-    .popular-item {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        justify-items: center;
-    }
+  .popular h1 {
+    font-size: 24px;
+  }
+  .popular-item {
+    gap: 12px;
+  }
 }
