@@ -12,7 +12,7 @@ const MyOrders = () => {
         const fetchOrders = async () => {
             try {
                 const token = localStorage.getItem('auth-token');
-                const response = await axios.get('http://localhost:4000/api/payment/my-orders', {
+                const response = await axios.get('https://shopper-commerce.onrender.com/api/payment/my-orders', {
                     headers: { 'auth-token': token }
                 });
                 if (response.data.success) {
@@ -30,7 +30,7 @@ const MyOrders = () => {
     const handleDownloadInvoice = async (orderId) => {
         try {
             const token = localStorage.getItem('auth-token');
-            const response = await axios.get(`http://localhost:4000/api/invoice/download-invoice/${orderId}`, {
+            const response = await axios.get(`https://shopper-commerce.onrender.com/api/invoice/download-invoice/${orderId}`, {
                 headers: { 'auth-token': token },
                 responseType: 'blob'
             });
