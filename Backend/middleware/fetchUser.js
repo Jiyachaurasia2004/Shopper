@@ -6,7 +6,7 @@ const fetchUser = (req, res, next) => {
 
     try {
         const data = jwt.verify(token, process.env.JWT_SECRET || "secret");
-        req.user = data.user;
+        req.user = data;
         next();
     } catch {
         res.status(401).send("Invalid token");

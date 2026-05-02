@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
     category: String,
     new_price: Number,
     old_price: Number,
+    stock: { type: Number, default: 10 },
     date: { type: Date, default: Date.now },
     available: { type: Boolean, default: true }
 });
