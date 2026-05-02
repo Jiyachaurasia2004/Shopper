@@ -26,7 +26,7 @@ const AdminAuth = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:4000/signup", {
+    const response = await fetch("https://shopper-commerce.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const AdminAuth = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:4000/api/auth/login", {
+    const response = await fetch("https://shopper-commerce.onrender.com/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
