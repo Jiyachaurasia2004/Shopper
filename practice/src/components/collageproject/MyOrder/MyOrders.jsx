@@ -58,7 +58,7 @@ const handleDeleteOrder = async (orderId) => {
         const token = localStorage.getItem('auth-token');
 
         const response = await axios.delete(
-            `http://localhost:4000/api/payment/delete-order/${orderId}`,
+            `https://shopper-e-commerce-backend-gip0.onrender.com/api/payment/delete-order/${orderId}`,
             {
                 headers: { 'auth-token': token }
             }
