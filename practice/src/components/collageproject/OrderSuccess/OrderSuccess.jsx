@@ -11,7 +11,7 @@ const OrderSuccess = () => {
   const handleDownloadInvoice = async () => {
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await axios.get(`http://localhost:4000/api/invoice/download-invoice/${orderId}`, {
+      const response = await axios.get(`https://shopper-e-commerce-backend-gip0.onrender.com/api/invoice/download-invoice/${orderId}`, {
         headers: { 'auth-token': token },
         responseType: 'blob' // important for file download
       });
