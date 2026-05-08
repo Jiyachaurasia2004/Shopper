@@ -19,7 +19,7 @@ const Loginsign = () => {
   const login = async () =>{
    console.log('login function executed',formData)
    let responseData;
-   await fetch('https://shopper-commerce.onrender.com/login',{
+   await fetch('https://shopper-backend-app-sq1q.onrender.com/login',{
      method:'POST',
      headers:{
        Accept:'application/json',
