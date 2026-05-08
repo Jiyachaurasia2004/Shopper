@@ -88,7 +88,7 @@ function PlaceOrder() {
       }
 
       // 1. Create order on backend
-      const { data } = await axios.post("https://shopper-commerce.onrender.com/api/payment/create-order", {
+      const { data } = await axios.post("https://shopper-backend-app-sq1q.onrender.com/api/payment/create-order", {
         amount: orderTotal,
         items,
         address: form
@@ -97,7 +97,7 @@ function PlaceOrder() {
       });
 
       // Fetch Razorpay Key
-      const { data: { key } } = await axios.get("https://shopper-commerce.onrender.com/api/payment/get-key");
+      const { data: { key } } = await axios.get("https://shopper-backend-app-sq1q.onrender.com/api/payment/get-key");
 
       if (data.success) {
         // 2. Open Razorpay Popup
@@ -112,7 +112,7 @@ function PlaceOrder() {
           handler: async function (response) {
             // 3. Verify Payment
             try {
-              const verifyRes = await axios.post("https://shopper-commerce.onrender.com/api/payment/verify-payment", {
+              const verifyRes = await axios.post("https://shopper-backend-app-sq1q.onrender.com/api/payment/verify-payment", {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
