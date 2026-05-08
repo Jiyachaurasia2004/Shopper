@@ -14,7 +14,7 @@ const OrderTracking = () => {
         const fetchOrder = async () => {
             try {
                 const token = localStorage.getItem('auth-token');
-                const response = await axios.get(`http://localhost:4000/api/orders/${orderId}`, {
+                const response = await axios.get(`https://shopper-e-commerce-backend-gip0.onrender.com/api/orders/${orderId}`, {
                     headers: { 'auth-token': token }
                 });
                 if (response.data.success) {
