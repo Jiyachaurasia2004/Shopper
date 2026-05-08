@@ -45,7 +45,41 @@ const MyOrders = () => {
             console.error("Failed to download invoice", error);
         }
     };
+const handleDeleteOrder = async (orderId) => {
 
+    const confirmDelete = window.confirm(
+        "Are you sure you want to delete this order?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+
+        const token = localStorage.getItem('auth-token');
+
+        const response = await axios.delete(
+            `http://localhost:4000/api/payment/delete-order/${orderId}`,
+            {
+                headers: { 'auth-token': token }
+            }
+        );
+
+        if (response.data.success) {
+
+            setOrders(
+                orders.filter((order) => order._id !== orderId)
+            );
+
+            alert("Order deleted successfully");
+        }
+
+    } catch (error) {
+
+        console.error("Delete failed:", error);
+
+        alert("Failed to delete order");
+    }
+};
     if (loading) {
         return (
             <div className="my-orders">
@@ -94,6 +128,12 @@ const MyOrders = () => {
                             <div className="order-footer">
                                 <button onClick={() => navigate(`/track-order/${order._id}`)}>Track Order</button>
                                 <button className="secondary" onClick={() => handleDownloadInvoice(order._id)}>Invoice</button>
+                                 <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteOrder(order._id)}
+                >
+                  Delete Order
+                </button>
                             </div>
                         </div>
                     ))
