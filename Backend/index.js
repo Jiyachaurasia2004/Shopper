@@ -12,6 +12,10 @@ const productRoutes = require('./routes/productRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const invoiceRoutes = require('./routes/invoiceRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const orderRoutes = require('./routes/orderRouter');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 
@@ -35,6 +39,15 @@ const startServer = (port) => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(morgan('dev'));
+
+// Rate Limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests from this IP, please try again later."
+});
+app.use('/api/', limiter);
 
 // ================= ROUTES =================
 app.get("/", (req, res) => {
@@ -45,12 +58,23 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/invoice', invoiceRoutes);
-app.use('/', uploadRoutes); // keeping root as the previous setup used /upload directly
+app.use('/api/admin', adminRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/', uploadRoutes); 
 
 // To map old frontend calls to the new /api namespace, we'll re-export routes on old paths for backward compatibility.
 // If the frontend is completely updated, we can remove these.
 app.use('/', authRoutes);
 app.use('/', productRoutes);
+
+// ================= ERROR HANDLING =================
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Internal Server Error"
+    });
+});
 
 // ================= START =================
 connectDB().then(() => {

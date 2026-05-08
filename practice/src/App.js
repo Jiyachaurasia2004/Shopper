@@ -11,6 +11,10 @@ import mens_banner from "./components/Assets/banner_mens.png"
 import women_banner from "./components/Assets/banner_women.png"
 import kid_banner from "./components/Assets/banner_kids.png"
 import OrderSuccess from "./components/collageproject/OrderSuccess/OrderSuccess";
+import MyOrders from "./components/collageproject/MyOrder/MyOrders.jsx";
+import OrderTracking from "./components/collageproject/OrderTracking/OrderTracking.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // Admin Imports
@@ -35,6 +39,8 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/checkout" element={<PlaceOrder/>}/>
           <Route path="/order-success/:orderId" element={<OrderSuccess />} />
+          <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/track-order/:orderId" element={<OrderTracking />} />
           <Route path="/login" element={<Loginsign />} />
 
 
@@ -48,10 +54,10 @@ function App() {
           </Route>
         </Routes>
         <Footer />
+        <ToastContainer position="bottom-right" theme="dark" />
       </BrowserRouter>
     </div>
   );
 }
 
 export default App;
-

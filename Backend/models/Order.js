@@ -5,9 +5,22 @@ const orderSchema = new mongoose.Schema({
     items: Array,
     amount: { type: Number, required: true },
     address: { type: Object, required: true },
-    status: { type: String, default: "pending" },
+    status: { 
+        type: String, 
+        default: "pending",
+        enum: ["pending", "confirmed", "shipped", "out_for_delivery", "delivered", "cancelled", "refunded"]
+    },
     paymentId: { type: String },
     orderId: { type: String },
+    refundId: { type: String },
+    history: [
+        {
+            status: String,
+            message: String,
+            updatedAt: { type: Date, default: Date.now }
+        }
+    ],
+    trackingNumber: { type: String },
     date: { type: Date, default: Date.now }
 });
 
