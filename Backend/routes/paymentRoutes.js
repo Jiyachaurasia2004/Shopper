@@ -7,6 +7,6 @@ router.post('/create-order', fetchUser, paymentController.createOrder);
 router.post('/verify-payment', fetchUser, paymentController.verifyPayment);
 router.get('/my-orders', fetchUser, paymentController.getUserOrders);
 router.get('/get-key', paymentController.getRazorpayKey);
-
+router.delete('/delete-order/:id', fetchUser, paymentController.deleteOrder);
 module.exports = router;
 

@@ -52,7 +52,43 @@ exports.createOrder = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+exports.deleteOrder = async (req, res) => {
+    try {
 
+        const order = await Order.findById(req.params.id);
+
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        // Check ownership
+        if (order.userId.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "Unauthorized"
+            });
+        }
+
+        await Order.findByIdAndDelete(req.params.id);
+
+        res.json({
+            success: true,
+            message: "Order deleted successfully"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
 // Verify Payment
 exports.verifyPayment = async (req, res) => {
     try {

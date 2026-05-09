@@ -14,7 +14,14 @@
     flex-direction: column;
     gap: 20px;
 }
-
+.delete-btn{
+   background:red;
+   color:white;
+   border:none;
+   padding:10px 16px;
+   border-radius:6px;
+   cursor:pointer;
+}
 /* CARD */
 .order-card {
     border: 1px solid #ddd;

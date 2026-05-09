@@ -52,7 +52,10 @@ const ShopContextProvider = (props) => {
         }
     }
     const removeFromCart = (itemId) => {
-        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+      setCartItems((prev) => ({
+        ...prev,
+        [itemId]: prev[itemId] > 0 ? prev[itemId] - 1 : 0
+    }));
         if(localStorage.getItem('auth-token')){
             fetch('http://localhost:4000/removefromcart',{
                 method:'POST',
@@ -81,7 +84,9 @@ const ShopContextProvider = (props) => {
         return totalAmount;
     }
 
-
+    const resetCart = () => {
+    setCartItems(getDefaultCart());
+}
     const getTotalCartItems = () =>{
         let totalItem = 0;
         for(const item in cartItems){
@@ -118,6 +123,7 @@ const ShopContextProvider = (props) => {
         discount,
         promoMessage,
         applyPromo,
+        resetCart
     };
     return (
         <ShopContext.Provider value={contextValue}>
