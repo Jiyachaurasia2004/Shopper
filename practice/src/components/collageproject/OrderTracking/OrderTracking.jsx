@@ -60,13 +60,23 @@ const OrderTracking = () => {
 </div>
                 
                 <div className="tracking-progress">
-                    {statuses.map((status, index) => (
-                        <div key={status} className={`step ${index <= currentStatusIndex ? 'active' : ''}`}>
-                            <div className="circle">{index + 1}</div>
-                            <p className="status-label">{status.replace(/_/g, ' ')}</p>
-                            {index < statuses.length - 1 && <div className="line"></div>}
-                        </div>
-                    ))}
+                    {statuses.map((status, index) => {
+                        let timestamp = null;
+                        if (status === 'pending' && order.createdAt) timestamp = order.createdAt;
+                        if (status === 'confirmed' && order.confirmedAt) timestamp = order.confirmedAt;
+                        if (status === 'shipped' && order.shippedAt) timestamp = order.shippedAt;
+                        if (status === 'out_for_delivery' && order.outForDeliveryAt) timestamp = order.outForDeliveryAt;
+                        if (status === 'delivered' && order.deliveredAt) timestamp = order.deliveredAt;
+                        
+                        return (
+                            <div key={status} className={`step ${index <= currentStatusIndex ? 'active' : ''}`}>
+                                <div className="circle">{index + 1}</div>
+                                <p className="status-label">{status.replace(/_/g, ' ')}</p>
+                                {timestamp && <p className="status-time">{new Date(timestamp).toLocaleDateString()}</p>}
+                                {index < statuses.length - 1 && <div className="line"></div>}
+                            </div>
+                        );
+                    })}
                 </div>
 
                 <div className="tracking-history">

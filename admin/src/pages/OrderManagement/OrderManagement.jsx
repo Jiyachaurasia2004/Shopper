@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import './OrderManagement.css';
 
 const OrderManagement = () => {
+    const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
@@ -20,12 +22,19 @@ const OrderManagement = () => {
             });
             if (response.data.success) {
                 setOrders(response.data.orders);
+                console.log("Admin Orders fetched:", response.data.orders);
             }
             setLoading(false);
         } catch (error) {
             console.error("Error fetching orders:", error);
+            if (error.response?.status === 401 || error.response?.status === 403) {
+                toast.error("Session expired. Please login again.");
+                localStorage.removeItem('auth-token');
+                navigate('/admin-login');
+            } else {
+                toast.error("Failed to fetch orders");
+            }
             setLoading(false);
-            toast.error("Failed to fetch orders");
         }
     };
 
@@ -34,8 +43,11 @@ const OrderManagement = () => {
     }, []);
 
     const filteredOrders = orders.filter(order => {
-        const matchesSearch = order._id.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                             order.address.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const idMatches = order._id?.toLowerCase().includes(searchTerm.toLowerCase());
+        const nameMatches = order.address?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+        const emailMatches = order.userId?.email?.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        const matchesSearch = idMatches || nameMatches || emailMatches;
         const matchesStatus = filterStatus === "all" || order.status === filterStatus;
         return matchesSearch && matchesStatus;
     });
@@ -51,8 +63,8 @@ const OrderManagement = () => {
     const handleStatusUpdate = async (orderId, newStatus) => {
         try {
             const token = localStorage.getItem('auth-token');
-            const response = await axios.put('http://localhost:4000/api/admin/update-status', 
-                { orderId, status: newStatus },
+            const response = await axios.put(`http://localhost:4000/api/admin/orders/${orderId}/status`, 
+                { status: newStatus },
                 { headers: { 'auth-token': token } }
             );
             if (response.data.success) {
@@ -61,7 +73,8 @@ const OrderManagement = () => {
             }
         } catch (error) {
             console.error("Error updating status:", error);
-            toast.error("Update failed");
+            toast.error(error.response?.data?.message || "Update failed");
+            fetchOrders(); // Refresh to reset UI state if backend rejects the change
         }
     };
 
@@ -117,8 +130,12 @@ const OrderManagement = () => {
                                 <tr key={order._id}>
                                     <td>{order._id.substring(0, 8)}...</td>
                                     <td>{order.address.name} <br /> <small>{order.userId?.email}</small></td>
-                                    <td>{new Date(order.date).toLocaleDateString()}</td>
-                                    <td>₹{order.amount}</td>
+                                   <td>
+  {new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+  }).format(new Date(order.createdAt))}
+</td>
+                                    <td>₹{order.totalAmount}</td>
                                     <td>
                                         <span className={`status-badge ${order.status}`}>
                                             {order.status}

@@ -65,6 +65,12 @@
     font-weight: 500;
 }
 
+.status-time {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+}
+
 .line {
     position: absolute;
     top: 15px;

@@ -39,7 +39,7 @@ exports.createOrder = async (req, res) => {
         const newOrder = new Order({
             userId: req.user.id, // from auth middleware
             items,
-            amount: amount,
+            totalAmount: amount,
             address,
             orderId: order.id,
             status: "pending"
@@ -143,7 +143,7 @@ exports.verifyPayment = async (req, res) => {
 // Fetch User Orders
 exports.getUserOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ userId: req.user.id }).sort({ date: -1 });
+        const orders = await Order.find({ userId: req.user.id }).sort({ createdAt: -1 });
         res.json({ success: true, orders });
     } catch (error) {
         console.error(error);
@@ -225,7 +225,7 @@ exports.initiateRefund = async (req, res) => {
         }
 
         const refund = await razorpayInstance.payments.refund(order.paymentId, {
-            amount: order.amount * 100, // full refund
+            amount: order.totalAmount * 100, // full refund
             speed: "normal",
             notes: { reason: "User requested cancellation" }
         });

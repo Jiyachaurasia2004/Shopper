@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
     items: Array,
-    amount: { type: Number, required: true },
+    totalAmount: { type: Number, required: true },
     address: { type: Object, required: true },
     status: { 
         type: String, 
@@ -21,7 +21,11 @@ const orderSchema = new mongoose.Schema({
         }
     ],
     trackingNumber: { type: String },
-    date: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    confirmedAt: { type: Date },
+    shippedAt: { type: Date },
+    outForDeliveryAt: { type: Date },
+    deliveredAt: { type: Date }
 });
 
 const Order = mongoose.model("Order", orderSchema);

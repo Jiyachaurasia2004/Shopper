@@ -7,6 +7,12 @@ import list_product_icon from '../../assets/Product_list_icon.svg'
 const Sidebar = () => {
   return (
     <div className='sidebar'>
+      <Link to={'/dashboard'} style={{textDecoration:"none"}}>
+        <div className="sidebar-item">
+            <span style={{ fontSize: '24px', marginRight: '10px' }}>📊</span>
+            <p>Dashboard</p>
+        </div>
+      </Link>
       <Link to={'/addproduct'} style={{textDecoration:"none"}}>
         <div className="sidebar-item">
             <img src={add_product_icon} alt="" />
@@ -17,6 +23,12 @@ const Sidebar = () => {
         <div className="sidebar-item">
             <img src={list_product_icon} alt="" />
             <p>Product List</p>
+        </div>
+      </Link>
+      <Link to={'/ordermanagement'} style={{textDecoration:"none"}}>
+        <div className="sidebar-item">
+            <img src={list_product_icon} alt="" />
+            <p>Orders</p>
         </div>
       </Link>
     </div>

@@ -51,41 +51,34 @@ const MyOrders = () => {
       console.error("Failed to download invoice", error);
     }
   };
-const handleDeleteOrder = async (orderId) => {
-
+  const handleDeleteOrder = async (orderId) => {
     const confirmDelete = window.confirm(
-        "Are you sure you want to delete this order?"
+      "Are you sure you want to delete this order?",
     );
 
     if (!confirmDelete) return;
 
     try {
+      const token = localStorage.getItem("auth-token");
 
-        const token = localStorage.getItem('auth-token');
+      const response = await axios.delete(
+        `http://localhost:4000/api/payment/delete-order/${orderId}`,
+        {
+          headers: { "auth-token": token },
+        },
+      );
 
-        const response = await axios.delete(
-            `http://localhost:4000/api/payment/delete-order/${orderId}`,
-            {
-                headers: { 'auth-token': token }
-            }
-        );
+      if (response.data.success) {
+        setOrders(orders.filter((order) => order._id !== orderId));
 
-        if (response.data.success) {
-
-            setOrders(
-                orders.filter((order) => order._id !== orderId)
-            );
-
-            alert("Order deleted successfully");
-        }
-
+        alert("Order deleted successfully");
+      }
     } catch (error) {
+      console.error("Delete failed:", error);
 
-        console.error("Delete failed:", error);
-
-        alert("Failed to delete order");
+      alert("Failed to delete order");
     }
-};
+  };
   if (loading) {
     return (
       <div className="my-orders">
@@ -114,12 +107,14 @@ const handleDeleteOrder = async (orderId) => {
                 <div>
                   <p className="label">Date</p>
                   <p className="value">
-                    {new Date(order.date).toLocaleDateString()}
+                    {new Intl.DateTimeFormat("en-IN", {
+                      dateStyle: "medium",
+                    }).format(new Date(order.createdAt))}
                   </p>
                 </div>
                 <div>
                   <p className="label">Total</p>
-                  <p className="value">₹{order.amount}</p>
+                  <p className="value">₹{order.totalAmount}</p>
                 </div>
                 <div>
                   <span className={`status ${order.status}`}>

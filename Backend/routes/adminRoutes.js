@@ -8,10 +8,9 @@ const { body, validationResult } = require('express-validator');
 
 router.get('/stats', fetchUser, adminAuth, adminController.getStats);
 router.get('/orders', fetchUser, adminAuth, adminController.getAllOrders);
-router.put('/update-status', [
+router.put('/orders/:id/status', [
     fetchUser,
     adminAuth,
-    body('orderId').notEmpty().withMessage('Order ID is required'),
     body('status').isIn(['pending', 'confirmed', 'shipped', 'out_for_delivery', 'delivered', 'cancelled', 'refunded'])
         .withMessage('Invalid status')
 ], (req, res, next) => {
