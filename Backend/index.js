@@ -38,7 +38,12 @@ const startServer = (port) => {
 // ================= MIDDLEWARE =================
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://shopper-frontend-website.onrender.com',
+    'https://shopper-admin-hm3y.onrender.com'
+  ]
+}));
 app.use(morgan('dev'));
 
 // Rate Limiting
