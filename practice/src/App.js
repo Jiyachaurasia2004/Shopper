@@ -13,8 +13,7 @@ import kid_banner from "./components/Assets/banner_kids.png"
 import OrderSuccess from "./components/collageproject/OrderSuccess/OrderSuccess";
 import MyOrders from "./components/collageproject/MyOrder/MyOrders.jsx";
 import OrderTracking from "./components/collageproject/OrderTracking/OrderTracking.jsx";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 // Admin Imports
