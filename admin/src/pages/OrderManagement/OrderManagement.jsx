@@ -17,7 +17,7 @@ const OrderManagement = () => {
     const fetchOrders = async () => {
         try {
             const token = localStorage.getItem('auth-token');
-            const response = await axios.get('http://localhost:4000/api/admin/orders', {
+            const response = await axios.get('https://shopper-backend-37ge.onrender.com/api/admin/orders', {
                 headers: { 'auth-token': token }
             });
             if (response.data.success) {
@@ -63,7 +63,7 @@ const OrderManagement = () => {
     const handleStatusUpdate = async (orderId, newStatus) => {
         try {
             const token = localStorage.getItem('auth-token');
-            const response = await axios.put(`http://localhost:4000/api/admin/orders/${orderId}/status`, 
+            const response = await axios.put(`https://shopper-backend-37ge.onrender.com/api/admin/orders/${orderId}/status`, 
                 { status: newStatus },
                 { headers: { 'auth-token': token } }
             );
