@@ -19,7 +19,7 @@ const Dashboard = () => {
         const fetchStats = async () => {
             try {
                 const token = localStorage.getItem('auth-token');
-                const response = await axios.get('http://localhost:4000/api/admin/stats', {
+                const response = await axios.get('https://shopper-backend-37ge.onrender.com/api/admin/stats', {
                     headers: { 'auth-token': token }
                 });
                 if (response.data.success) {
