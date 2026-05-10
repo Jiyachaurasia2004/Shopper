@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+
 import './OrderSuccess.css';
 
 const OrderSuccess = () => {
@@ -26,7 +26,7 @@ const OrderSuccess = () => {
       link.parentNode.removeChild(link);
     } catch (error) {
       console.error("Failed to download invoice", error);
-      toast.error("Failed to download invoice. Please try again.");
+     
     }
   };
 
