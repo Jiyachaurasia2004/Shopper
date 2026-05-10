@@ -13,7 +13,7 @@ const MyOrders = () => {
       try {
         const token = localStorage.getItem("auth-token");
         const response = await axios.get(
-          "http://localhost:4000/api/payment/my-orders",
+          "https://shopper-backend-37ge.onrender.com/api/payment/my-orders",
           {
             headers: { "auth-token": token },
           },
@@ -34,7 +34,7 @@ const MyOrders = () => {
     try {
       const token = localStorage.getItem("auth-token");
       const response = await axios.get(
-        `http://localhost:4000/api/invoice/download-invoice/${orderId}`,
+        `https://shopper-backend-37ge.onrender.com/api/invoice/download-invoice/${orderId}`,
         {
           headers: { "auth-token": token },
           responseType: "blob",
@@ -62,7 +62,7 @@ const MyOrders = () => {
       const token = localStorage.getItem("auth-token");
 
       const response = await axios.delete(
-        `http://localhost:4000/api/payment/delete-order/${orderId}`,
+        `https://shopper-backend-37ge.onrender.com/api/payment/delete-order/${orderId}`,
         {
           headers: { "auth-token": token },
         },
