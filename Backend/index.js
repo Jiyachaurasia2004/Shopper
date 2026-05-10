@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     'https://shopper-frontend-website.onrender.com',
-    'https://shopper-admin-hm3y.onrender.com'
+    'https://shopper-admin-ak5w.onrender.com'
   ]
 }));
 app.use(morgan('dev'));
